@@ -1,22 +1,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { isNumericChar } from '../../utils';
+import { getLines, isNumericChar } from '../../utils';
 
 type GearBox = Array<Array<number | string>>
 
 type Coordinate = `${string}-${string}`
 type Gear = {values: number[], gearPosition: Coordinate}
 
-const getLines = (): string[] => {
-    const content = fs.readFileSync(path.resolve(__dirname, '../../../assets/riddles/3/input.txt'), 'utf8')
-    return content.split('\n')
-}
-
 const parseLine = (line: string): Array<number | string> => line.split('').map(character => isNumericChar(character) ? +character : character)
 
 const parseGearBox = (lines: string[]): GearBox => lines.map(parseLine)
 
-const gearBox = parseGearBox(getLines())
+const gearBox = parseGearBox(getLines(3))
 
 const isSymbol = (character: string | number): boolean => character === '*'
 

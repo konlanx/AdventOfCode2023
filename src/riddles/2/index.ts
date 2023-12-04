@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { getLines } from '../../utils';
 
 type Round = {
     red: number,
@@ -14,11 +15,6 @@ type Game = {
 
 const CONSTRAINTS = {'red': 12, 'green': 13, 'blue': 14}
 const GAME = 'Game '
-
-const getLines = (): string[] => {
-    const content = fs.readFileSync(path.resolve(__dirname, '../../../assets/riddles/2/input.txt'), 'utf8')
-    return content.split('\n')
-}
 
 const convertScore = (scoreContent: string[], identifier: string): number => 
     +(scoreContent.find(score => score.endsWith(identifier))?.replace(` ${identifier}`, '') ?? 0)
@@ -37,7 +33,7 @@ const convertRounds = (roundContent: string): Round => {
     }
 }
 
-const convertGames = (): Game[] => getLines().map(line => {
+const convertGames = (): Game[] => getLines(2).map(line => {
     const contents = line.split(':')
 
     const id = contents[0].replace(GAME, '')

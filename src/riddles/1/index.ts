@@ -1,13 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { isNumericChar } from '../../utils';
+import { getLines, isNumericChar } from '../../utils';
 
 const NUMBERS: {[id: number]: string} = {1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
-
-const getLines = (): string[] => {
-    const content = fs.readFileSync(path.resolve(__dirname, '../../../assets/riddles/1/input.txt'), 'utf8')
-    return content.split('\n')
-}
 
 const convertLine = (line: string, result = ''): string => {
     if (!line) return result
@@ -33,7 +28,7 @@ const parseLine = (line: string): number => {
 }
 
 const solve = (): number => {
-    const lines = getLines()
+    const lines = getLines(1)
 
     const sum = lines.reduce<number>((acc, curr) => acc += curr ? parseLine(curr): 0, 0)
     return sum
