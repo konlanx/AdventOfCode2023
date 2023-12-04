@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export const getLines = (riddle: number): string[] => {
-    const content = fs.readFileSync(path.resolve(__dirname, `../../../assets/riddles/${riddle}/input.txt`), 'utf8')
+    const content = fs.readFileSync(path.resolve(__dirname, `../../assets/riddles/${riddle}/input.txt`), 'utf8')
     return content.split('\n')
 }
 

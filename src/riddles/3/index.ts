@@ -1,5 +1,3 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import { getLines, isNumericChar } from '../../utils';
 
 type GearBox = Array<Array<number | string>>

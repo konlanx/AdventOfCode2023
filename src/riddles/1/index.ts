@@ -1,5 +1,3 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import { getLines, isNumericChar } from '../../utils';
 
 const NUMBERS: {[id: number]: string} = {1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
