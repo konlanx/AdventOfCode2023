@@ -2,8 +2,6 @@ import { getLines } from "../../utils"
 
 type Card = {
     id: number,
-    winning: number[],
-    values: number[],
     winningNumbers: number
 }
 
@@ -25,8 +23,6 @@ const parseCard = (line: string): Card => {
 
     return {
         id,
-        winning,
-        values,
         winningNumbers
     }
 }
@@ -62,6 +58,5 @@ const before = performance.now()
 const multipliedCards = multiplyCards(cards, cards)
 const after = performance.now()
 
-console.log(`Sum 2 took ${after - before} ms`)
-
 console.log('Sum 2', multipliedCards.length)
+console.log(`Sum 2 took ${after - before} ms`)
