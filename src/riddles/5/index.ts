@@ -16,6 +16,11 @@ type Mapping = {
     range: number
 }
 
+type SpreadSeed = {
+    source: number,
+    range: number
+}
+
 const SEED_IDENTIFIER = 'seeds: '
 const MAP_IDENTIFIER = ' map:'
 
@@ -75,6 +80,24 @@ const findPoints = (almanac: Almanac): number[] => almanac.seeds.map(seed => fol
 
 const findSmallestPoint = (points: number[]): number => Math.min(...points)
 
+const spreadSeeds = (seeds: number[]): SpreadSeed[] => {
+    const seedPairs = seeds.flatMap((_, index, array) => index % 2 ? [] : [array.slice(index, index + 2)]);
+    return seedPairs.map(pair => ({source: pair[0], range: pair[1]}))
+}
+
+const followSpreadRoute = (seed: SpreadSeed, maps: Map[]): number => {
+    let smallestLocation = followRoute(seed.source, maps)
+
+    for (let index = seed.source + 1; index < (seed.source + seed.range); index++) {
+        const location = followRoute(index, maps)
+        smallestLocation = location < smallestLocation ? location : smallestLocation
+    }
+
+    return smallestLocation
+}
+
+const findSpreadPoints = (seeds: SpreadSeed[], maps: Map[]): number[] => seeds.map(seed => followSpreadRoute(seed, maps))
+
 // Part 1
 const content = getContent(5)
 const almanac = parseAlmanac(content)
@@ -82,3 +105,10 @@ const points = findPoints(almanac)
 const smallestPoint = findSmallestPoint(points)
 
 console.log('Smallest point', smallestPoint)
+
+// Part 2
+const spreadedSeeds = spreadSeeds(almanac.seeds)
+const spreadedPoints = findSpreadPoints(spreadedSeeds, almanac.maps)
+const spreadedSmallestPoint = findSmallestPoint(spreadedPoints)
+
+console.log('Spreaded smallest point', spreadedSmallestPoint)
