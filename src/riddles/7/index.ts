@@ -57,14 +57,11 @@ const getHandRank = (hand: Hand): number => {
 
   const firstCardAmount = getOccurence(hand.cards, individualCards[0]);
 
-  if (firstCardAmount === 5 || firstCardAmount + jokerAmount === 5)
-    return TYPES["FIVE_OF_A_KIND"];
+  if (firstCardAmount + jokerAmount === 5) return TYPES["FIVE_OF_A_KIND"];
 
   const secondCardAmount = getOccurence(hand.cards, individualCards[1]);
   if (
-    firstCardAmount === 4 ||
     firstCardAmount + jokerAmount === 4 ||
-    secondCardAmount === 4 ||
     secondCardAmount + jokerAmount === 4
   )
     return TYPES["FOUR_OF_A_KIND"];
@@ -73,23 +70,17 @@ const getHandRank = (hand: Hand): number => {
 
   const thirdCardAmount = getOccurence(hand.cards, individualCards[2]);
   if (
-    firstCardAmount === 3 ||
     firstCardAmount + jokerAmount === 3 ||
-    secondCardAmount === 3 ||
     secondCardAmount + jokerAmount === 3 ||
-    thirdCardAmount === 3 ||
     thirdCardAmount + jokerAmount === 3
   )
     return TYPES["THREE_OF_A_KIND"];
 
   if (
-    (firstCardAmount === 2 && secondCardAmount === 2) ||
     (firstCardAmount + jokerAmount === 2 && secondCardAmount === 2) ||
     (firstCardAmount === 2 && secondCardAmount + jokerAmount === 2) ||
-    (firstCardAmount === 2 && thirdCardAmount === 2) ||
     (firstCardAmount + jokerAmount === 2 && thirdCardAmount === 2) ||
     (firstCardAmount === 2 && thirdCardAmount + jokerAmount === 2) ||
-    (secondCardAmount === 2 && thirdCardAmount === 2) ||
     (secondCardAmount + jokerAmount === 2 && thirdCardAmount === 2) ||
     (secondCardAmount === 2 && thirdCardAmount + jokerAmount === 2)
   )
@@ -97,13 +88,9 @@ const getHandRank = (hand: Hand): number => {
 
   const fourthCardAmount = getOccurence(hand.cards, individualCards[3]);
   if (
-    firstCardAmount === 2 ||
     firstCardAmount + jokerAmount === 2 ||
-    secondCardAmount === 2 ||
     secondCardAmount + jokerAmount === 2 ||
-    thirdCardAmount === 2 ||
     thirdCardAmount + jokerAmount === 2 ||
-    fourthCardAmount === 2 ||
     fourthCardAmount + jokerAmount === 2
   )
     return TYPES["ONE_PAIR"];
